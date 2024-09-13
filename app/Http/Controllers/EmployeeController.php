@@ -1,0 +1,125 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Employee;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
+class EmployeeController extends Controller
+{
+    // Display a listing of the employees
+    public function index(Request $request)
+    {
+        // Start a query on the Employee model
+        $employees = Employee::query();
+
+        // Handle individual search fields
+        if ($request->has('search_name') && $request->search_name != '') {
+            $employees->where('full_name', 'like', '%' . $request->search_name . '%');
+        }
+
+        if ($request->has('search_email') && $request->search_email != '') {
+            $employees->where('email', 'like', '%' . $request->search_email . '%');
+        }
+
+        if ($request->has('search_mobile') && $request->search_mobile != '') {
+            $employees->where('mobile', 'like', '%' . $request->search_mobile . '%');
+        }
+
+        if ($request->has('search_dob') && $request->search_dob != '') {
+            $employees->where('dob', 'like', '%' . $request->search_dob . '%');
+        }
+
+        // Handle sorting
+        if ($request->has('sort_by')) {
+            $employees->orderBy($request->sort_by, $request->get('order', 'asc'));
+        }
+
+        // Paginate and pass the employees to the view
+        return view('employees.index', [
+            'employees' => $employees->paginate(10),
+        ]);
+    }
+
+
+    // Show the form for creating a new employee
+    public function create()
+    {
+        return view('employees.create');
+    }
+
+    // Store a newly created employee in storage
+    public function store(Request $request)
+    {
+        // Validate the request data
+        $validated = $request->validate([
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'full_name' => 'required|string|max:255',
+            'email' => 'required|email|unique:employees,email',
+            'mobile' => 'required|string|max:20',
+            'dob' => 'required|date',
+        ]);
+
+        // Handle the photo upload
+        if ($request->hasFile('photo')) {
+            $path = $request->file('photo')->store('photos', 'public');
+            $validated['photo'] = $path;
+        }
+
+        // Create the employee
+        Employee::create($validated);
+
+        return redirect()->route('employees.index')->with('success', 'Employee created successfully.');
+    }
+
+    // Show the form for editing the specified employee
+    public function edit(Employee $employee)
+    {
+        return view('employees.edit', compact('employee'));
+    }
+
+    // Update the specified employee in storage
+    public function update(Request $request, Employee $employee)
+    {
+        // Validate the request data
+        $validated = $request->validate([
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'full_name' => 'required|string|max:255',
+            'email' => 'required|email|unique:employees,email,' . $employee->id,
+            'mobile' => 'required|string|max:20',
+            'dob' => 'required|date',
+        ]);
+
+        // Handle the photo upload
+        if ($request->hasFile('photo')) {
+            // Delete the old photo if it exists
+            if ($employee->photo && Storage::disk('public')->exists($employee->photo)) {
+                Storage::disk('public')->delete($employee->photo);
+            }
+            // Store the new photo
+            $path = $request->file('photo')->store('photos', 'public');
+            $validated['photo'] = $path;
+        }
+
+        // Update the employee
+        $employee->update($validated);
+
+        return redirect()->route('employees.index')->with('success', 'Employee updated successfully.');
+    }
+
+    // Remove the specified employee from storage
+    public function destroy(Employee $employee)
+    {
+        // Delete the photo if it exists
+        if ($employee->photo && Storage::disk('public')->exists($employee->photo)) {
+            Storage::disk('public')->delete($employee->photo);
+        }
+
+        // Delete the employee
+        $employee->delete();
+
+        return redirect()->route('employees.index')->with('success', 'Employee deleted successfully.');
+    }
+}
+
