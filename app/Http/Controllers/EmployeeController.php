@@ -41,9 +41,13 @@ class EmployeeController extends Controller
 
 
         // Paginate and pass the employees to the view
-        return view('employees.index', [
-            'employees' => $employees->paginate(10),
-        ]);
+        $employees = $employees->paginate(10);
+
+        // Add the search and sorting parameters to the pagination links
+        $employees->appends($request->all());
+
+        return view('employees.index', compact('employees'));
+
     }
 
 
