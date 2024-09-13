@@ -30,7 +30,7 @@
                         <a href=""
                             class="flex items-center py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700">
                             <img src="https://img.icons8.com/material-outlined/24/ffffff/home.png" alt="Home"
-                                class="mr-2 h-6 w-6" /> <!-- Set size for home icon -->
+                                class="mr-2 h-6 w-6" />
                             Home
                         </a>
                     </li>
@@ -38,7 +38,7 @@
                         <a href="{{ route('employees.index') }}"
                             class="flex items-center py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700">
                             <img src="https://img.icons8.com/ios-filled/24/ffffff/businessman.png" alt="Employees"
-                                class="mr-2 h-6 w-6" /> <!-- Set size for employee icon -->
+                                class="mr-2 h-6 w-6" />
                             Employees
                         </a>
                     </li>
@@ -46,7 +46,7 @@
                         <a href="{{ route('employees.create') }}"
                             class="flex items-center py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700">
                             <img src="https://img.icons8.com/material-outlined/24/ffffff/add-user-male.png"
-                                alt="Add Employee" class="mr-2 h-6 w-6" /> <!-- Set size for add employee icon -->
+                                alt="Add Employee" class="mr-2 h-6 w-6" />
                             Add Employee
                         </a>
                     </li>
@@ -65,14 +65,20 @@
 
     </div>
 
+    <!-- Copyright Footer -->
+    <footer class="bg-blue-900 text-white text-center py-4">
+        <p class="text-sm">© {{ date('Y') }} EmployeeLite. All rights reserved.</p>
+    </footer>
+
     <!-- Scripts (if needed) -->
+    <script>
+        flatpickr("#dob", {
+            dateFormat: "Y-m-d", // Change format as needed
+            maxDate: new Date(), // Prevent future dates
+            onReady: function(selectedDates, dateStr, instance) {},
+        });
+    </script>
+
 </body>
-<script>
-    flatpickr("#dob", {
-        dateFormat: "Y-m-d", // Change format as needed
-        maxDate: new Date(), // Prevent future dates
-        onReady: function(selectedDates, dateStr, instance) {},
-    });
-</script>
 
 </html>
