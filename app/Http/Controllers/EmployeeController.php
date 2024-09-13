@@ -62,7 +62,7 @@ class EmployeeController extends Controller
     {
         // Validate the request data
         $validated = $request->validate([
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'full_name' => 'required|string|max:255',
             'email' => 'required|email|unique:employees,email',
             'mobile' => 'required|string|max:20',
@@ -92,7 +92,7 @@ class EmployeeController extends Controller
     {
         // Validate the request data
         $validated = $request->validate([
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'full_name' => 'required|string|max:255',
             'email' => 'required|email|unique:employees,email,' . $employee->id,
             'mobile' => 'required|string|max:20',
