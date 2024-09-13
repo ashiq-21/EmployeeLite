@@ -34,7 +34,11 @@ class EmployeeController extends Controller
         // Handle sorting
         if ($request->has('sort_by')) {
             $employees->orderBy($request->sort_by, $request->get('order', 'asc'));
+        } else {
+            // Default to show latest employees first
+            $employees->orderBy('created_at', 'desc'); // Adjust the field name if necessary
         }
+
 
         // Paginate and pass the employees to the view
         return view('employees.index', [
