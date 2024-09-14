@@ -236,14 +236,14 @@
                     class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50 hidden">
                     <div class="bg-white rounded-lg shadow-lg p-6 w-1/3">
                         <h2 class="text-lg font-semibold mb-4">Confirm Deletion</h2>
-                        <p>Do you want to delete this employee?</p>
+                        <p>Are you sure, you want to delete this?</p>
                         <div class="mt-4 flex justify-end">
                             <button onclick="closeModal()"
-                                class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md mr-2">Cancel</button>
+                                class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md mr-2">No</button>
                             <form id="deleteForm" action="" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="bg-red-600 textwhite p-x-4 py-2 rounded-md">Delete</button>
+                                <button type="submit" class="bg-red-600 textwhite px-4 py-2 rounded-md">Yes</button>
                             </form>
                         </div>
                     </div>
