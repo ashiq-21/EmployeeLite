@@ -192,7 +192,7 @@
                 @forelse($employees as $employee)
                     <tr class="border-b">
                         <td class="p-4">
-                            <img src="{{ $employee->photo ? asset('storage/' . $employee->photo) : 'https://via.placeholder.com/50' }}"
+                            <img src="{{ $employee->photo ? asset('storage/photos/' . $employee->photo) : 'https://via.placeholder.com/50' }}"
                                 alt="Employee Photo" class="w-10 h-10 rounded-full object-cover">
                         </td>
                         <td class="p-4">{{ $employee->full_name }}</td>

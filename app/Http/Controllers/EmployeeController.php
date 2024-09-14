@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class EmployeeController extends Controller
 {
@@ -79,7 +81,12 @@ class EmployeeController extends Controller
         $validated['full_name'] = $validated['first_name'] . ' ' . $validated['last_name'];
         // Handle the photo upload
         if ($request->hasFile('photo')) {
-            $path = $request->file('photo')->store('photos', 'public');
+            // Store the new photo with 300*300 height and width
+            $manager = new ImageManager(new Driver());
+            $image = $manager->read($request->file('photo'));
+            $image->scale(300, 300);
+            $path = time() . '.' . $request->file('photo')->getClientOriginalExtension();
+            $image->save(storage_path('app/public/photos/' . $path));
             $validated['photo'] = $path;
         }
 
@@ -114,8 +121,12 @@ class EmployeeController extends Controller
             if ($employee->photo && Storage::disk('public')->exists($employee->photo)) {
                 Storage::disk('public')->delete($employee->photo);
             }
-            // Store the new photo
-            $path = $request->file('photo')->store('photos', 'public');
+            // Store the new photo with 300*300 height and width
+            $manager = new ImageManager(new Driver());
+            $image = $manager->read($request->file('photo'));
+            $image->scale(300, 300);
+            $path = time() . '.' . $request->file('photo')->getClientOriginalExtension();
+            $image->save(storage_path('app/public/photos/' . $path));
             $validated['photo'] = $path;
         }
 
