@@ -3,7 +3,7 @@
 @section('content')
     <div class="mb-4">
         <!-- Search Section -->
-        <form method="GET" action="{{ route('employees.index') }}" class="grid grid-cols-4 gap-4 items-center mb-4">
+        <form method="GET" action="{{ route('employees.index') }}" class="grid grid-cols-5 gap-4 items-center mb-4">
             <!-- Search by Name -->
             <div class="flex flex-col">
                 <input type="text" name="search_name" id="search_name" value="{{ request('search_name') }}"
@@ -34,21 +34,20 @@
                     class="px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300">
             </div>
 
-
-            <!-- Search Button -->
-            <div class="col-span-4 mt-2 flex justify-end">
-                <button type="submit"
-                    class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-500 focus:outline-none flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+            <!-- Search Button with only the logo -->
+            <div class="flex flex-col justify-end">
+                <button type="submit" class="p-1 focus:outline-none transition duration-200 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M10 20a8 8 0 100-16 8 8 0 000 16zm12 0l-5-5" />
                     </svg>
-                    <!-- No text here -->
                 </button>
             </div>
 
+
         </form>
+
     </div>
 
     <!-- Employee Table -->
