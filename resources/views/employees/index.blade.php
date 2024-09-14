@@ -212,16 +212,19 @@
                                 </svg>
 
                             </a>
-                            <!-- Delete Button -->
-                            <button type="button" class="inline-flex items-center text-red-600 hover:text-red-900 ml-2"
+                            <!-- Delete Button with Trash Icon -->
+                            <button type="button"
+                                class="inline-flex items-center text-red-600 hover:text-red-900 ml-2 px-3 py-1 text-sm font-medium bg-transparent border border-red-600 rounded-md hover:bg-red-600 hover:text-white transition duration-200"
                                 onclick="openModal('{{ $employee->id }}')">
-                                <!-- Delete Icon (SVG) -->
+                                <!-- Trash Icon (SVG) -->
                                 <svg class="w-5 h-5 mr-1" xmlns="http://www.w3.org/2000/svg" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M6 18L18 6M6 6l12 12" />
+                                        d="M19 7l-.867 12.142A2 2 0 0 1 16.136 21H7.864a2 2 0 0 1-1.997-1.858L5 7m5 0V5a2 2 0 1 1 4 0v2m4 0H6" />
                                 </svg>
                             </button>
+
+
 
                         </td>
 
