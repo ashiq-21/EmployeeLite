@@ -8,41 +8,57 @@
             @csrf
             @method('PUT')
 
-            <!-- Full Name -->
-            <div class="mb-4">
-                <label for="full_name" class="block text-sm font-medium text-gray-700">Full Name</label>
-                <input type="text" name="full_name" id="full_name"
-                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500
-                    @error('full_name') border-red-500 @enderror"
-                    value="{{ old('full_name', $employee->full_name) }}" required>
-                @error('full_name')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                @enderror
+            <!-- First Name and Last Name (Same Row) -->
+            <div class="mb-4 flex space-x-4">
+                <!-- First Name -->
+                <div class="w-1/2">
+                    <label for="first_name" class="block text-sm font-medium text-gray-700">First Name</label>
+                    <input type="text" name="first_name" id="first_name"
+                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500
+                        @error('first_name') border-red-500 @enderror"
+                        value="{{ old('first_name', $employee->first_name) }}" required>
+                    @error('first_name')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <!-- Last Name -->
+                <div class="w-1/2">
+                    <label for="last_name" class="block text-sm font-medium text-gray-700">Last Name</label>
+                    <input type="text" name="last_name" id="last_name"
+                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500
+                        @error('last_name') border-red-500 @enderror"
+                        value="{{ old('last_name', $employee->last_name) }}" required>
+                    @error('last_name')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror
+                </div>
             </div>
 
             <!-- Email -->
-            <div class="mb-4">
+            <div class="mb-4 w-1/2 inline-block">
                 <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                 <input type="email" name="email" id="email"
                     class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500
-                    @error('email') border-red-500 @enderror"
-                    value="{{ old('email', $employee->email) }}" required>
+        @error('email') border-red-500 @enderror"
+                    value="{{ old('email', isset($employee) ? $employee->email : '') }}" required>
                 @error('email')
                     <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
             </div>
 
             <!-- Mobile -->
-            <div class="mb-4">
+            <div class="mb-4 w-1/2 inline-block">
                 <label for="mobile" class="block text-sm font-medium text-gray-700">Mobile</label>
                 <input type="text" name="mobile" id="mobile"
                     class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500
-                    @error('mobile') border-red-500 @enderror"
-                    value="{{ old('mobile', $employee->mobile) }}" required>
+        @error('mobile') border-red-500 @enderror"
+                    value="{{ old('mobile', isset($employee) ? $employee->mobile : '') }}" required>
                 @error('mobile')
                     <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
             </div>
+
 
             <!-- Date of Birth -->
             <div class="mb-4 relative">
@@ -59,19 +75,24 @@
             <!-- Photo -->
             <div class="mb-4">
                 <label for="photo" class="block text-sm font-medium text-gray-700">Photo</label>
+
+                <!-- Display previous photo if exists -->
                 @if ($employee->photo)
-                    <div class="mb-2">
+                    <div class="mb-4">
                         <img src="{{ asset('storage/' . $employee->photo) }}" alt="Employee Photo"
-                            class="w-24 h-24 object-cover rounded-md border border-gray-300">
+                            class="h-24 w-24 rounded-full object-cover">
                     </div>
                 @endif
+
                 <input type="file" name="photo" id="photo"
                     class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500
-                    @error('photo') border-red-500 @enderror">
+        @error('photo') border-red-500 @enderror">
                 @error('photo')
                     <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
             </div>
+
+
 
             <!-- Submit Button -->
             <div class="flex justify-end">

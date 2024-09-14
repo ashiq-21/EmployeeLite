@@ -63,12 +63,13 @@ class EmployeeController extends Controller
         // Validate the request data
         $validated = $request->validate([
             'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'full_name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
             'email' => 'required|email|unique:employees,email',
             'mobile' => 'required|string|max:20',
             'dob' => 'required|date',
         ]);
-
+        $validated['full_name'] = $validated['first_name'] . ' ' . $validated['last_name'];
         // Handle the photo upload
         if ($request->hasFile('photo')) {
             $path = $request->file('photo')->store('photos', 'public');
@@ -92,13 +93,13 @@ class EmployeeController extends Controller
     {
         // Validate the request data
         $validated = $request->validate([
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'full_name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
             'email' => 'required|email|unique:employees,email,' . $employee->id,
             'mobile' => 'required|string|max:20',
             'dob' => 'required|date',
         ]);
-
+        $validated['full_name'] = $validated['first_name'] . ' ' . $validated['last_name'];
         // Handle the photo upload
         if ($request->hasFile('photo')) {
             // Delete the old photo if it exists
