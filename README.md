@@ -16,3 +16,6 @@ EmployeeLite is a web-based application designed for managing employee records. 
 -   [Composer](https://getcomposer.org/download/)
 -   [Node.js](https://nodejs.org/en/download/) & npm
 -   [MySQL](https://dev.mysql.com/downloads/)
+-   [Vite](https://tailwindcss.com/docs/guides/laravel)
+-   composer require intervention/image
+-   php ini extension = gd commented out
