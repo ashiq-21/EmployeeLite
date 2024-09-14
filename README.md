@@ -10,9 +10,9 @@ EmployeeLite is a web-based application designed for managing employee records. 
 -   Pagination for easy navigation through employee records.
 -   Responsive design for optimal viewing on various devices.
 
-## Technologies Used
+## Prerequisites
 
--   **Backend**: Laravel 10
--   **Frontend**: Tailwind CSS
--   **Database**: MySQL
--   **JavaScript Library**: Flatpickr (for date selection)
+-   [PHP](https://www.php.net/downloads) >= 8.0
+-   [Composer](https://getcomposer.org/download/)
+-   [Node.js](https://nodejs.org/en/download/) & npm
+-   [MySQL](https://dev.mysql.com/downloads/)
