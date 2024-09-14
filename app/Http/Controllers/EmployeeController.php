@@ -43,8 +43,15 @@ class EmployeeController extends Controller
         // Paginate and pass the employees to the view
         $employees = $employees->paginate(10);
 
-        // Add the search and sorting parameters to the pagination links
-        $employees->appends($request->all());
+        // Add only necessary fields to the pagination links
+        $employees->appends([
+            'search_name' => $request->get('search_name'),
+            'search_email' => $request->get('search_email'),
+            'search_mobile' => $request->get('search_mobile'),
+            'search_dob' => $request->get('search_dob'),
+            'sort_by' => $request->get('sort_by'),
+            'order' => $request->get('order'),
+        ]);
 
         return view('employees.index', compact('employees'));
 
