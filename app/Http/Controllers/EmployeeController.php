@@ -100,6 +100,7 @@ class EmployeeController extends Controller
     {
         // Validate the request data
         $validated = $request->validate([
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|email|unique:employees,email,' . $employee->id,
