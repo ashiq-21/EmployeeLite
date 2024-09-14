@@ -87,7 +87,7 @@ class EmployeeController extends Controller
             $image->scale(300, 300);
             $path = time() . '.' . $request->file('photo')->getClientOriginalExtension();
             $image->save(storage_path('app/public/photos/' . $path));
-            $validated['photo'] = $path;
+            $validated['photo'] = 'photos/' . $path;
         }
 
         // Create the employee
@@ -127,7 +127,7 @@ class EmployeeController extends Controller
             $image->scale(300, 300);
             $path = time() . '.' . $request->file('photo')->getClientOriginalExtension();
             $image->save(storage_path('app/public/photos/' . $path));
-            $validated['photo'] = $path;
+            $validated['photo'] = 'photos/' . $path;
         }
 
         // Update the employee

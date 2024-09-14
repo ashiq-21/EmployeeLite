@@ -79,7 +79,7 @@
                 <!-- Display previous photo if exists -->
                 @if ($employee->photo)
                     <div class="mb-4">
-                        <img src="{{ asset('storage/photos/' . $employee->photo) }}" alt="Employee Photo"
+                        <img src="{{ asset('storage/' . $employee->photo) }}" alt="Employee Photo"
                             class="h-24 w-24 rounded-full object-cover">
                     </div>
                 @endif
